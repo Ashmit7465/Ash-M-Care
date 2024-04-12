@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 /config.js
+/src/assets/images
 
 # Editor directories and files
 .vscode/*
