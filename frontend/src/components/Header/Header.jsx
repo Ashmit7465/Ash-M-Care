@@ -94,22 +94,22 @@ const Header = () => {
 
           <div className="flex items-center gap-4">
             {isTokenValid && data ? (
-              <div className="flex items-center">
-                <h2>{data?.name}</h2>
+              <div className="mt-4 flex items-center">
+                {/* <h2>{data?.name}</h2> */}
                 <Link
                   to={`${
                     role === "doctor"
-                      ? "/doctor/profile/me"
+                      ? "/doctors/profile/me"
                       : "/users/profile/me"
                   }`}
                 >
-                  <figure className="w-[35px] h-[35px] rounded-full cursor-pointer">
+                  <button className="w-[50px] h-[50px] rounded-full cursor-pointer">
                     <img
                       src={data?.photo}
                       alt="userImage"
                       className="w-full rounded-full"
                     />
-                  </figure>
+                  </button>
                 </Link>
               </div>
             ) : (

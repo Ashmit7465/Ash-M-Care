@@ -1,7 +1,7 @@
 import React from "react";
 import { formatDate } from "../../utils/formatDate";
 
-const AboutDoctor = () => {
+const AboutDoctor = ({ name, about, qualifications, experience }) => {
   return (
     <div>
       <div>
