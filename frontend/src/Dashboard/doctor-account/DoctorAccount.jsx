@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Loading from "../../components/Loader/Loading";
 import Error from "../../components/Error/Error";
 import useFetchData from "../../hooks/useFetchData";
@@ -9,6 +9,7 @@ import AboutDoctor from "../../pages/Doctors/AboutDoctor"
 import Profile from "./Profile";
 
 const DoctorAccount = () => {
+  
   const { data, loading, error } = useFetchData(
     `${BASE_URL}/doctors/profile/me`
   );
@@ -65,33 +66,33 @@ const DoctorAccount = () => {
                       </figure>
 
                       <div>
-                        <span className="bg-indigo-50 text-irisBLueClr py-1 px-4 lg:py-2 lg:px-6 rounded text-[14px] leading-4 lg:[text-18px] lg:leading-6 font-semibold">
-                          {data.specialization} Cardiac Surgeon
+                        <span className="bg-indigo-50 text-irisBLueClr py-1 px-2 lg:py-2 lg:px-6 rounded text-[14px] leading-4 lg:[text-18px] lg:leading-6 font-semibold">
+                          {data.specialization}
                         </span>
 
                         <h3 className="text-[22px] leading-9 font-bold text-headingClr mt-3 ">
-                          Ravikant Sinha
+                          {data.name}
                         </h3>
 
                         <div className="flex items-center gap-[6px]">
                           <span className="flex items-center text-headingClr text-[14px] leading-5 lg:text-[16px] lg:leading-6 font-semibold">
                             <img src={starIcon} alt="starIcon" />
-                            4.5
+                            {data.averageRating}
                           </span>
                           <span className="flex items-center text-headingClr text-[14px] leading-5 lg:text-[16px] lg:leading-6 font-semibold">
-                            (264)
+                            ({data.totalRating})
                           </span>
                         </div>
 
-                        <p className="text_para font-[15px] lg:max-w-[390px] leading-6">About the Doctor</p>
+                        <p className="text_para font-[15px] lg:max-w-[390px] leading-6">{data?.bio}</p>
                       </div>
                     </div>
-                    <AboutDoctor name={data.name} about={data.about} qualifications={data.qualification} experience={data.experiences} />
+                    <AboutDoctor name={data.name} about={data.about} qualification={data.qualification} experiences={data.experiences} />
                   </div>
                 )}
 
                 {tab === "appointments" && <div>Appointments</div>}
-                {tab === "settings" && <div><Profile /></div>}
+                {tab === "settings" && <div><Profile doctorData={data}/></div>}
               </div>
             </div>
           </div>
