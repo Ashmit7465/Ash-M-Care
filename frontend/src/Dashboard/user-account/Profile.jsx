@@ -12,7 +12,6 @@ const Profile = ({ user }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    password: "",
     bloodGroup: "",
     photo: null,
     gender: "",
@@ -22,11 +21,11 @@ const Profile = ({ user }) => {
 
   useEffect(() => {
     setFormData({
-      name: user.name,
-      email: user.email,
-      photo: user.photo,
-      gender: user.gender,
-      bloodGroup: user.bloodGroup,
+      name: user?.name,
+      email: user?.email,
+      photo: user?.photo,
+      gender: user?.gender,
+      bloodGroup: user?.bloodGroup,
     });
   }, [user]);
 
@@ -49,6 +48,17 @@ const Profile = ({ user }) => {
     ev.preventDefault();
     setLoading(true);
 
+    const filteredFormData = Object.entries(formData).reduce(
+      (acc, [key, value]) => {
+        // console.log(`Key: ${key}, Value: ${value}`);
+        if (value !== null && value !== "" && value.length !== 0) {
+          acc[key] = value;
+        }
+        return acc;
+      },
+      {}
+    );
+
     try {
       const res = await fetch(`${BASE_URL}/users/${user._id}`, {
         method: "put",
@@ -56,7 +66,7 @@ const Profile = ({ user }) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(filteredFormData),
       });
 
       const { message } = await res.json();
@@ -107,26 +117,6 @@ const Profile = ({ user }) => {
             onChange={handleInputChange}
             className="border border-solid border-black/100 hover:border-primaryClr w-full py-3 pr-4 rounded-md focus:outline-none  px-4
             text-[16px] leading-7 placeholder:text-headingClr cursor-pointer"
-            aria-readonly
-            readOnly
-          />
-        </div>
-
-        <div className="mb-5">
-          <label htmlFor="password" className="block mb-2 text-[18px]">
-            Password:
-          </label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Update your Password"
-            value={formData.password}
-            onChange={handleInputChange}
-            className="border border-solid border-black/100 hover:border-primaryClr w-full py-3 pr-4 rounded-md focus:outline-none  px-4
-            text-[16px] leading-7 placeholder:text-headingClr cursor-pointer"
-            aria-readonly
-            readOnly
           />
         </div>
 

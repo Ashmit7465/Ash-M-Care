@@ -37,7 +37,7 @@ const MyAccount = () => {
           <div className="grid md:grid-cols-3 gap-10">
             <div className="pb-[50px] px-[30px] rounded-md">
               <div className="flex items-center justify-center">
-                <figure className="w-[100px] h-[100px] rounded-full border-2 border-solid border-primaryClr">
+                <figure className="w-[180px] h-[180px] rounded-full border-2 border-solid border-primaryClr">
                   <img
                     src={userData.photo}
                     alt="userImage"

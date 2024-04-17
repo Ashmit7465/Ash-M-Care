@@ -45,6 +45,25 @@ export const deleteUser = async (req, res) => {
   }
 };
 
+export const getUserByID = async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    const userData = await User.findById(userId).select("-password");
+
+    res.status(201).json({
+      success: true,
+      message: "User found successfully...",
+      data: userData,
+    });
+  } catch (error) {
+    res.status(404).json({
+      success: false,
+      message: "Failed to find the user...",
+    });
+  }
+}
+
 export const getSingleUser = async (req, res) => {
   const userId = req.params.id;
 

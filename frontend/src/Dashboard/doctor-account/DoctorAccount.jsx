@@ -7,6 +7,7 @@ import Tabs from "./Tabs";
 import starIcon from "../../assets/images/Star.png";
 import AboutDoctor from "../../pages/Doctors/AboutDoctor"
 import Profile from "./Profile";
+import Appointments from "./Appointments";
 
 const DoctorAccount = () => {
   
@@ -91,7 +92,7 @@ const DoctorAccount = () => {
                   </div>
                 )}
 
-                {tab === "appointments" && <div>Appointments</div>}
+                {tab === "appointments" && <div><Appointments appointments={data.appointments} /></div>}
                 {tab === "settings" && <div><Profile doctorData={data}/></div>}
               </div>
             </div>

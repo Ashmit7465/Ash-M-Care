@@ -45,13 +45,13 @@ export const deleteDoctor = async (req, res) => {
   }
 };
 
-export const getSingleDoctor = async (req, res) => {
+export const getDoctorById = async (req, res) => {
   const doctorId = req.params.id;
 
   try {
-    const doctorData = await Doctor.findById(doctorId)
-      .populate("reviews")
-      .select("-password");
+    const doctorData = await Doctor.findById(doctorId).select(
+      "-password"
+    );
 
     res.status(201).json({
       success: true,
@@ -61,10 +61,42 @@ export const getSingleDoctor = async (req, res) => {
   } catch (error) {
     res.status(404).json({
       success: false,
-      message: "Failed tp find the Doctor...",
+      message: "Failed to find the Doctor...",
+    });
+  }
+}
+
+export const getSingleDoctor = async (req, res) => {
+  const doctorId = req.params.id;
+
+  try {
+    // Find the doctor by ID
+    const doctorData = await Doctor.findById(doctorId)
+      .populate("reviews")
+      .select("-password");
+
+    // Retrieve all reviews
+    const allReviews = await Review.find({});
+
+    // Filter the reviews for the specific doctor
+    const doctor_reviews = allReviews.filter(review => review.doctor.toString() === doctorId)
+    .slice(0, 5);
+
+    res.status(200).json({
+      success: true,
+      message: "Doctor found successfully...",
+      data: doctorData,
+      reviews: doctor_reviews // Include filtered reviews in the response
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(404).json({
+      success: false,
+      message: "Failed to find the Doctor...",
     });
   }
 };
+
 
 export const getAllDoctors = async (req, res) => {
   try {
@@ -114,7 +146,7 @@ export const getDoctorProfile = async (req, res) => {
     }
 
     const { password, ...rest } = doctor._doc;
-    const appointments = await Booking.find({doctor: doctorId})
+    const appointments = await Booking.find({ doctor: doctorId });
 
     res.status(200).json({
       success: true,

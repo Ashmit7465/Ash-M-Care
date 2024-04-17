@@ -23,13 +23,15 @@ const ReviewSchema = new mongoose.Schema(
       max: 5,
       default: 0,
     },
+    createdAt: {
+      type: Date,
+      default: Date.now(),
+    }
   },
-  {
-    timeStamps: true,
-  }
+  
 );
 
-ReviewSchema.pre(/^find/, (next) => {
+ReviewSchema.pre(/^find/, function(next) {
   this.populate({
     path: "user",
     select: "name photo",
@@ -37,6 +39,7 @@ ReviewSchema.pre(/^find/, (next) => {
 
   next();
 });
+
 
 ReviewSchema.statics.calcAverageRatings = async function (doctorId) {
   const stats = await this.aggregate([
@@ -52,28 +55,17 @@ ReviewSchema.statics.calcAverageRatings = async function (doctorId) {
     },
   ]);
   //   console.log(stats);
-  if (stats.length > 0) {
-    await Doctor.findByIdAndUpdate(doctorId, {
-      totalRating: stats[0].numOfRating,
-      averageRating: stats[0].avgRating,
-    });
-  }
+        if(stats.length > 0)
+        {
+          await Doctor.findByIdAndUpdate(doctorId, {
+            totalRating: stats[0].numOfRating,
+            averageRating: stats[0].avgRating,
+          });
+        }
 };
 
 ReviewSchema.post("save", function () {
   this.constructor.calcAverageRatings(this.doctor);
 });
-
-// Define a flag to check if the middleware has been applied
-// let calcAverageRatingsMiddlewareApplied = false;
-
-// Attach the middleware only if it hasn't been applied yet
-// if (!calcAverageRatingsMiddlewareApplied) {
-//   ReviewSchema.post("save", function () {
-//     this.constructor.calcAverageRatings(this.doctor);
-//   });
-
-//   calcAverageRatingsMiddlewareApplied = true;
-// }
 
 export const Review = mongoose.model("Review", ReviewSchema);

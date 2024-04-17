@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import uploadImage from "../../utils/uploadCloudinary";
 import {BASE_URL, token} from "../../../config"
 import {toast} from "react-hot-toast"
-import { useSelector } from "react-redux";
 import HashLoader from 'react-spinners/HashLoader'
 
 const Profile = ({doctorData}) => {
@@ -13,7 +12,6 @@ const Profile = ({doctorData}) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    password: "",
     phone: "",
     bio: "",
     gender: "",
@@ -29,6 +27,24 @@ const Profile = ({doctorData}) => {
     about: "",
     photo: null,
   });
+
+  useEffect(() => {
+    setFormData({
+      name: doctorData?.name,
+      email: doctorData?.email,
+      phone: doctorData?.phone,
+      bio: doctorData?.bio,
+      gender: doctorData?.gender,
+      specialization: doctorData?.specialization,
+      consultationFee: doctorData?.consultationFee,
+      qualification: doctorData?.qualification,
+      experiences: doctorData?.experiences,
+      timeSlots: doctorData?.timeSlots,
+      about: doctorData?.about,
+      photo: doctorData?.photo,
+    })
+  }, [doctorData]);
+
   // console.log(formData);
   const handleInputChange = (ev) => {
     setFormData({ ...formData, [ev.target.name]: ev.target.value });
@@ -132,6 +148,17 @@ const Profile = ({doctorData}) => {
     ev.preventDefault();
     setLoading(true);
 
+    const filteredFormData = Object.entries(formData).reduce(
+      (acc, [key, value]) => {
+        // console.log(`Key: ${key}, Value: ${value}`);
+        if (value !== null && value !== "" && value.length !== 0) {
+          acc[key] = value;
+        }
+        return acc;
+      },
+      {}
+    );
+
     try 
     {
       const res = await fetch(`${BASE_URL}/doctors/${doctorData._id}`, {
@@ -140,7 +167,7 @@ const Profile = ({doctorData}) => {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(filteredFormData)
       });
 
       const result = await res.json();
@@ -150,17 +177,15 @@ const Profile = ({doctorData}) => {
         throw Error(result.message);
       }
 
-      toast(result.message);
+      toast.success(result.message);
       setLoading(false);
     }
     catch(err)
     {
-        toast(err.message);
+        toast.error(err.message);
         setLoading(false);
     }
   }
-
-  console.log(formData);
 
   return (
     <div>
@@ -191,24 +216,6 @@ const Profile = ({doctorData}) => {
             onChange={handleInputChange}
             placeholder="Email Id"
             className="form_input"
-            aria-readonly
-            readOnly
-            disabled={true}
-          />
-        </div>
-        <div className="mb-5">
-          <p className="form_label">Password*</p>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            value={formData.password}
-            onChange={handleInputChange}
-            placeholder="Your password"
-            className="form_input"
-            aria-readonly
-            readOnly
-            disabled={true}
           />
         </div>
         <div className="mb-5">
@@ -536,10 +543,15 @@ const Profile = ({doctorData}) => {
         <div className="mt-7">
           <button
             type="submit"
-            onClick={submitHandler}
+            disabled={loading & true}
+
             className="bg-primaryClr text-white text-[18px] leading-[30px] w-full py-3 px-4 rounded-lg"
           >
-            Update Profile
+            {loading ? (
+              <HashLoader size={35} color="#ffffff" />
+            ) : (
+              "Update Profile"
+            )}
           </button>
         </div>
       </form>

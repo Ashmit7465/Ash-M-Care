@@ -8,6 +8,7 @@ import {
   getAllUsers,
   getUserProfile,
   getMyAppointments,
+  getUserByID,
 } from "../controllers/user.js";
 import { authenticate, restrict } from "../auth/verifyToken.js";
 

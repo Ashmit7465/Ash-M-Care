@@ -103,11 +103,11 @@ const Header = () => {
                       : "/users/profile/me"
                   }`}
                 >
-                  <button className="w-[50px] h-[50px] rounded-full cursor-pointer">
+                  <button className="w-[40px] h-[40px] rounded-full cursor-pointer">
                     <img
                       src={data?.photo}
                       alt="userImage"
-                      className="w-full rounded-full"
+                      className=" rounded-full"
                     />
                   </button>
                 </Link>

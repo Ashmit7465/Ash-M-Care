@@ -4,10 +4,10 @@ import signUpImg from "../assets/images/signup.gif";
 import { Link, useNavigate } from "react-router-dom";
 import avatar from "../assets/images/main-img-01.jpeg";
 import { useState } from "react";
-import uploadImage from "../utils/uploadCloudinary"
+import uploadImage from "../utils/uploadCloudinary";
 import { BASE_URL } from "../../config";
-import {toast} from 'react-hot-toast'
-import HashLoader from 'react-spinners/HashLoader'
+import { toast } from "react-hot-toast";
+import HashLoader from "react-spinners/HashLoader";
 
 const Signup = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -23,7 +23,7 @@ const Signup = () => {
     role: "patient",
   });
 
-  const[loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (ev) => {
     setFormData({ ...formData, [ev.target.name]: ev.target.value });
@@ -36,7 +36,7 @@ const Signup = () => {
 
     setPreviewURL(data.url);
     setSelectedFile(data.url);
-    setFormData({...formData, photo:data.url});
+    setFormData({ ...formData, photo: data.url });
   };
 
   const navigate = useNavigate();
@@ -46,30 +46,26 @@ const Signup = () => {
     ev.preventDefault();
     setLoading(true);
 
-    try 
-    {
-        const res = await fetch(`${BASE_URL}/auth/register`, {
-          method: 'post',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData)
-        })
+    try {
+      const res = await fetch(`${BASE_URL}/auth/register`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-        const {message} = await res.json();
+      const { message } = await res.json();
 
-        if(!res.ok)
-        {
-          throw new Error(message);
-        }
-        setLoading(false);
-        toast(message);
-        // alert("Registration Successful");
-        navigate('/login');
-    }
-    catch (error)
-    {
-      toast(error);
+      if (!res.ok) {
+        throw new Error(message);
+      }
+      setLoading(false);
+      toast.success(message);
+      // alert("Registration Successful");
+      navigate("/login");
+    } catch (error) {
+      toast.error(error);
       // alert("Error in registration")
       setLoading(false);
     }
@@ -188,13 +184,15 @@ const Signup = () => {
               </div>
 
               <div className="mb-5 flex items-center gap-3">
-                {selectedFile && <figure className="w-[60px] h-[60px] rounded-full border-2 border-solid border-primaryClr flex items-center justify-center">
-                  <img
-                    src={previewURL}
-                    alt="avatar"
-                    className="rounded-full w-full"
-                  />
-                </figure>}
+                {selectedFile && (
+                  <figure className="w-[60px] h-[60px] rounded-full border-2 border-solid border-primaryClr flex items-center justify-center">
+                    <img
+                      src={previewURL}
+                      alt="avatar"
+                      className="rounded-full w-full"
+                    />
+                  </figure>
+                )}
 
                 <div className="relative w-[130px] h-[50px]">
                   <input
@@ -221,7 +219,11 @@ const Signup = () => {
                   type="submit"
                   className="bg-primaryClr btn w-full px-4 py-3 leading-[30px] rounded-xl hover:bg-black/100"
                 >
-                  {loading ? (<HashLoader size={35} color='#ffffff' />) : ( "Sign Up" )}
+                  {loading ? (
+                    <HashLoader size={35} color="#ffffff" />
+                  ) : (
+                    "Sign Up"
+                  )}
                 </button>
               </div>
 

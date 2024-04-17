@@ -1,20 +1,63 @@
 import React, { useState } from "react";
 import { AiFillStar } from "react-icons/ai";
+import { useParams } from "react-router-dom";
+import {BASE_URL, token} from "../../../config"
+import {toast} from "react-hot-toast"
+import HashLoader from 'react-spinners/HashLoader'
 
 const FeedbackForm = () => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
-  const [review, setReview] = useState("");
+  const [reviewText, setReviewText] = useState("");
+  const [loading, setLoading] = useState(false);
+  const {id} = useParams();
+
+  console.log(id);
 
   const handleSubmitReview = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
+    try
+    {
+      if(!rating || !reviewText)
+      {
+        setLoading(false);
+        return toast.error("Rating and Review fields are required");
+      }
+      console.log(id);
+      const res = await fetch(`${BASE_URL}/doctors/${id}/reviews`, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({rating, reviewText}),
+      });
+
+      const result = await res.json();
+      if(!result.ok) 
+      {
+        throw new Error(result.message);
+      }
+
+      setLoading(false);
+      toast(result.message);
+      setReviewText("");
+      setRating(0);
+    }
+    catch(error)
+    {
+      setLoading(false);
+      toast(error.message);
+    }
   };
 
   return (
-    <form action="">
+    <form onSubmit={handleSubmitReview} action="">
       <div>
         <h3 className="text-[16px] text-headingClr leading-6 font-semibold mb-4 mt-0">
-          How would you rate your overall experience
+          How would you rate your overall experience ?
         </h3>
 
         <div>
@@ -56,12 +99,12 @@ const FeedbackForm = () => {
           className="border border-solid border-[#0066ff34] focus:outline outline-primaryClr w-full px-4 py-3 rounded-md"
           rows="5"
           placeholder="Enter your feedback here"
-          onChange={(ev) => setReview(ev.target.value)}
+          onChange={(ev) => setReviewText(ev.target.value)}
         ></textarea>
       </div>
 
-      <button type="submit" className="btn" onClick={handleSubmitReview}>
-        Submit Feedback
+      <button type="submit" className="btn hover:bg-black">
+        {loading ? <HashLoader size={25} color="#ffffff"/> : ('Submit Feedback')} 
       </button>
     </form>
   );

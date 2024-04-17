@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import express from "express";
 import { Router } from "express";
-import { updateDoctor, deleteDoctor, getSingleDoctor, getAllDoctors, getDoctorProfile } from "../controllers/doctor.js";
+import { updateDoctor, deleteDoctor, getSingleDoctor, getAllDoctors, getDoctorProfile, getDoctorById } from "../controllers/doctor.js";
 import { authenticate, restrict } from "../auth/verifyToken.js";
 import reviewRoute from "./review.js"
 

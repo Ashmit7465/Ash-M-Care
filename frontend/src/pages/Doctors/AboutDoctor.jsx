@@ -1,7 +1,7 @@
 import React from "react";
 import { formatDate } from "../../utils/formatDate";
 
-const AboutDoctor = ({ name, about, qualification=[], experiences=[] }) => {
+const AboutDoctor = ({ name, about, qualification, experiences }) => {
   return (
     <div>
       <div>
@@ -23,7 +23,7 @@ const AboutDoctor = ({ name, about, qualification=[], experiences=[] }) => {
 
         <ul className="pt-4 md:p-5">
 
-        {qualification.map((item, index) =>  <li key={index} className="flex flex-col sm:flex-row sm:justify-between sm:items-end md:gap-5 mb-[30px]">
+        {qualification && qualification.map((item, index) =>  <li key={index} className="flex flex-col sm:flex-row sm:justify-between sm:items-end md:gap-5 mb-[30px]">
             <div>
               <span className="text-irisBLueClr text-[15px] leading-6 font-semibold">
                 {formatDate(item.startingDate)} - {formatDate(item.endingDate)}
@@ -63,7 +63,7 @@ const AboutDoctor = ({ name, about, qualification=[], experiences=[] }) => {
 
         <ul className="pt-4 md:p-5">
 
-          {experiences.map((item, index) => <li key={index} className="flex flex-col sm:flex-row sm:justify-between sm:items-end md:gap-5 mb-[30px]">
+          {experiences && experiences.map((item, index) => <li key={index} className="flex flex-col sm:flex-row sm:justify-between sm:items-end md:gap-5 mb-[30px]">
             <div>
               <span className="text-irisBLueClr text-[15px] leading-6 font-semibold">
                 {formatDate(item.startingDate)} - {formatDate(item.endingDate)}

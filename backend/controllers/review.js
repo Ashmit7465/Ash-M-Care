@@ -17,6 +17,7 @@ export const getAllReviews = async (req, res) => {
       }
       catch (error)
       {
+            console.log(error.message);
             res.status(404).json({
                   success: false,
                   message: "Could not get reviews...",
@@ -35,17 +36,17 @@ export const createReview = async (req, res) => {
       {
             req.body.user = req.userId;
       }
-
-      const newReview = await Review.create(req.body);
-
       try
       {
+            const  reviews = await Review.find({});
+            const newReview = await Review.create(req.body);
             const savedReview = await newReview.save();
 
             await Doctor.findByIdAndUpdate(req.body.doctor, {
                   $push: {reviews: savedReview._id}
             });
 
+            console.log(reviews, "hello reviews");
             res.status(201).json({
                   success: true,
                   message: "Review submitted successfully...",
