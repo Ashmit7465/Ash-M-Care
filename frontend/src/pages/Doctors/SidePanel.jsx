@@ -1,13 +1,49 @@
 import React from "react";
+import convertTime from "../../utils/convertDate";
+import {BASE_URL, token} from "../../../config.js"
+import {toast} from 'react-hot-toast';
 
-const SidePanel = () => {
+const SidePanel = ({ doctorId, consultationFee, timeSlots }) => {
+
+  const bookingHandler = async () => {
+    try 
+    {
+      const res = await fetch(`${BASE_URL}/bookings/checkout-session/${doctorId}`, {
+        method: 'post',
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+      });
+
+      const result = await res.json();
+
+      if(!result.success)
+      {
+        // toast.error("Could not create Session. Please try again");
+        // console.log(result.message);
+        throw new Error(result.message + 'Please try again');
+      }
+
+      if(result.session.url) 
+      {
+        window.location.href = result.session.url;
+      }
+
+    }
+    catch (error) 
+    {
+      console.log(error.message);
+      toast.error(error.message);
+    }
+  }
+
   return (
     <div className="shadow-panelShadow p-3 lg:p-5 rounded-md">
       <div className="flex items-center justify-between">
         <p className="text_para mt-0 font-semibold">Consultation Fee</p>
 
         <span className="text-[16px] leading-7 lg:text-[22px] lg:leading-8 text-headingClr font-bold">
-          800 INR
+          {consultationFee} INR
         </span>
       </div>
 
@@ -17,39 +53,26 @@ const SidePanel = () => {
         </p>
 
         <ul className="mt-3 ">
-          <li className="flex items-center justify-between mb-2">
-            <p className="text-[15px] leading-6 text-textClr font-semibold">
-              Sunday
-            </p>
+          {timeSlots && timeSlots.map((slot, index) => {
+            return (
+              <li
+                className="flex items-center justify-between mb-2"
+                key={index}
+              >
+                <p className="text-[16px] leading-6 text-textClr font-semibold">
+                  {slot.day.charAt(0).toUpperCase() + slot.day.slice(1)}
+                </p>
 
-            <p className="text-[15px] leading-6 text-textClr font-semibold">
-              11.30 AM - 3:30 PM
-            </p>
-          </li>
-
-          <li className="flex items-center justify-between mb-2">
-            <p className="text-[15px] leading-6 text-textClr font-semibold">
-              Tuesday
-            </p>
-
-            <p className="text-[15px] leading-6 text-textClr font-semibold">
-              05.30 PM - 9:30 PM
-            </p>
-          </li>
-
-          <li className="flex items-center justify-between mb-2">
-            <p className="text-[15px] leading-6 text-textClr font-semibold">
-              Thursday
-            </p>
-
-            <p className="text-[15px] leading-6 text-textClr font-semibold">
-              7.00 PM - 11:00 PM
-            </p>
-          </li>
+                <p className="text_para">
+                  {convertTime(slot.startingTime)} - {convertTime(slot.endingTime)}
+                </p>
+              </li>
+            );
+          })}
         </ul>
       </div>
 
-      <button className="btn px-2 w-full rounded-md">Book Appointment</button>
+      <button onClick={bookingHandler} className="btn px-2 w-full rounded-md hover:bg-black">Book Appointment</button>
     </div>
   );
 };

@@ -56,8 +56,8 @@ const MyAccount = () => {
                   {userData.email}
                 </p>
                 <p className="text-textClr  text-[15px] leading-6 font-medium">
-                  Blood Group:{userData.bloodGroup}
-                  <span className="ml-2 text-headingClr text-[18px]">A+</span>
+                  Blood Group:
+                  <span className="ml-2 text-headingClr text-[18px]">{userData.bloodGroup}</span>
                 </p>
               </div>
 

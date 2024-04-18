@@ -12,7 +12,7 @@ import Error from "../../components/Error/Error";
 const Feedback = ({reviews, totalRating}) => {
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
 
-  console.log(reviews);
+  // console.log(reviews);
 
   return (
     <div>
@@ -21,7 +21,7 @@ const Feedback = ({reviews, totalRating}) => {
           All Reviews ({totalRating})
         </h4>
 
-        {reviews && reviews.length > 0 && reviews?.map((review, index) => (<div className="flex justify-between gap-10 mb-[30px]">
+        {reviews && reviews.length > 0 && reviews?.map((review, index) => (<div key={index} className="flex justify-between gap-10 mb-[30px]">
           <div key={index} className="flex gap-3">
             <figure className="w-10 h-10 rounded-full">
               <img className="w-full" src={review?.user?.photo} alt="avatarImg" />

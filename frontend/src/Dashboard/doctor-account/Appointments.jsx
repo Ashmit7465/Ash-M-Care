@@ -2,6 +2,9 @@ import React from "react";
 import { formatDate } from "../../utils/formatDate";
 
 const Appointments = ({ appointments }) => {
+
+  const latestAppointments = appointments.sort((a, b) => b.createdAt - a.createdAt).slice(0, 5);
+
   return (
     <table className="w-full text-left text-sm text-gray-500">
       <thead className="text-xs text-gray-700 uppercase bg-gray-100">
@@ -25,7 +28,7 @@ const Appointments = ({ appointments }) => {
       </thead>
 
       <tbody>
-        {appointments?.map((item) => (
+        {latestAppointments?.map((item) => (
           <tr key={item._id}>
             <th
               scope="row"
@@ -33,7 +36,7 @@ const Appointments = ({ appointments }) => {
             >
               <img
                 src={item.user.photo}
-                alt={imageUser}
+                alt="imageUser"
                 className="w-10 h-10 rounded-full"
               />
               <div className="pl-3">

@@ -8,6 +8,10 @@ export const updateDoctor = async (req, res) => {
   const doctorId = req.params.id;
 
   try {
+
+    // const doctorDataTemp = await Doctor.findById(doctorId);
+    // console.log(doctorDataTemp);
+
     const doctorData = await Doctor.findByIdAndUpdate(
       doctorId,
       { $set: req.body },
@@ -80,7 +84,8 @@ export const getSingleDoctor = async (req, res) => {
 
     // Filter the reviews for the specific doctor
     const doctor_reviews = allReviews.filter(review => review.doctor.toString() === doctorId)
-    .slice(0, 5);
+    .sort((a, b) => b.createdAt - a.createdAt)
+    .slice(0, 3);
 
     res.status(200).json({
       success: true,

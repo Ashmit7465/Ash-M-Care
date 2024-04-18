@@ -1,5 +1,4 @@
 import React from "react";
-import doctorImg from "../../assets/images/doctor-img02.png";
 import starIcon from "../../assets/images/Star.png";
 import { useState } from "react";
 import AboutDoctor from "./AboutDoctor";
@@ -42,7 +41,10 @@ const DoctorsDetails = () => {
     photo,
   } = doctor;
 
-  console.log(doctor);
+  // console.log(consultationFee);
+  // console.log(timeSlots);
+
+  // console.log(doctor);
 
   return (
     <>
@@ -122,7 +124,7 @@ const DoctorsDetails = () => {
               </div>
 
               <div>
-                <SidePanel />
+                <SidePanel doctorId={doctor._id} consultationFee={consultationFee} timeSlots={timeSlots} />
               </div>
             </div>
           )}

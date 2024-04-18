@@ -50,7 +50,8 @@ const Profile = ({ user }) => {
 
     const filteredFormData = Object.entries(formData).reduce(
       (acc, [key, value]) => {
-        // console.log(`Key: ${key}, Value: ${value}`);
+        console.log(`Key: ${key}, Value: ${value}`);
+        console.log(value.length);
         if (value !== null && value !== "" && value.length !== 0) {
           acc[key] = value;
         }
@@ -75,11 +76,11 @@ const Profile = ({ user }) => {
         throw new Error(message);
       }
       setLoading(false);
-      toast(message);
+      toast.success(message);
       // alert("Registration Successful");
       navigate("/users/profile/me");
     } catch (error) {
-      toast(error);
+      toast.error(error.message);
       // alert("Error in registration")
       setLoading(false);
     }
@@ -121,6 +122,22 @@ const Profile = ({ user }) => {
         </div>
 
         <div className="mb-5">
+          <label htmlFor="bloodGroup" className="block mb-2 text-[18px]">
+            Email:
+          </label>
+          <input
+            type="text"
+            name="bloodGroup"
+            id="bloodGroup"
+            placeholder="Update your Blood Group from default blood group value"
+            value={formData.bloodGroup}
+            onChange={handleInputChange}
+            className="border border-solid border-black/100 hover:border-primaryClr w-full py-3 pr-4 rounded-md focus:outline-none  px-4
+            text-[16px] leading-7 placeholder:text-headingClr cursor-pointer"
+          />
+        </div>
+
+        {/* <div className="mb-5">
           <label htmlFor="bloodgroup" className="block mb-2 text-[18px]">
             Blood Group:
           </label>
@@ -134,7 +151,7 @@ const Profile = ({ user }) => {
             className="border border-solid border-black/100 hover:border-primaryClr w-full py-3 pr-4 rounded-md focus:outline-none  px-4
             text-[16px] leading-7 placeholder:text-headingClr cursor-pointer"
           />
-        </div>
+        </div> */}
 
         <div className="mb-5 flex items-center justify-between">
           <label

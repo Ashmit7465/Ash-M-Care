@@ -12,7 +12,7 @@ const FeedbackForm = () => {
   const [loading, setLoading] = useState(false);
   const {id} = useParams();
 
-  console.log(id);
+  // console.log(id);
 
   const handleSubmitReview = async (e) => {
     e.preventDefault();
@@ -25,7 +25,7 @@ const FeedbackForm = () => {
         setLoading(false);
         return toast.error("Rating and Review fields are required");
       }
-      console.log(id);
+      // console.log(id);
       const res = await fetch(`${BASE_URL}/doctors/${id}/reviews`, {
         method: 'post',
         headers: {

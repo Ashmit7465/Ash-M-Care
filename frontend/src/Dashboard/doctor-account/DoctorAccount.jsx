@@ -15,6 +15,8 @@ const DoctorAccount = () => {
     `${BASE_URL}/doctors/profile/me`
   );
 
+  // console.log(data.appointments);
+
   const [tab, setTab] = useState("overview");
 
   return (

@@ -174,6 +174,7 @@ const Profile = ({doctorData}) => {
 
       if(!res.ok)
       {
+        console.log(result.message);
         throw Error(result.message);
       }
 
@@ -182,6 +183,7 @@ const Profile = ({doctorData}) => {
     }
     catch(err)
     {
+        console.log(err.message);
         toast.error(err.message);
         setLoading(false);
     }

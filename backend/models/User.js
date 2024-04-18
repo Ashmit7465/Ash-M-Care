@@ -32,6 +32,7 @@ const UserSchema = new mongoose.Schema({
       },
       bloodGroup: {
             type: String,
+            default: "A+",
       },
       appointments: {
             type: mongoose.Types.ObjectId,
