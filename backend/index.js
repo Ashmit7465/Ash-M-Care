@@ -12,7 +12,7 @@ import bookingRoute from "./routes/booking.js"
 // import crypto from "crypto"
 
 config({
-      path: "./config.env" 
+      path: "./.env" 
 });
 
 const app = express();
