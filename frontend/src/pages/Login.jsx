@@ -50,7 +50,7 @@ const Login = () => {
 
         dispatch(loginReducer(result));
 
-        console.log(result, "Login data");
+        // console.log(result, "Login data");
 
         setLoading(false);
         toast.success(result.message);

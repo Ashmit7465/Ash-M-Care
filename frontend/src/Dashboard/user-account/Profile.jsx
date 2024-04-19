@@ -54,8 +54,8 @@ const Profile = ({ user }) => {
 
     const filteredFormData = Object.entries(formData).reduce(
       (acc, [key, value]) => {
-        console.log(`Key: ${key}, Value: ${value}`);
-        console.log(value.length);
+        // console.log(`Key: ${key}, Value: ${value}`);
+        // console.log(value.length);
         if (value !== null && value !== "" && value.length !== 0) {
           acc[key] = value;
         }

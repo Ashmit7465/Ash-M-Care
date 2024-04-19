@@ -18,7 +18,7 @@ const Tabs = ({ tab, setTab, doctor }) => {
   };
 
   const deleteAccountHandler = async (ev) => {
-    console.log("delete karna hai");
+    // console.log("delete karna hai");
     ev.preventDefault();
     try 
     {

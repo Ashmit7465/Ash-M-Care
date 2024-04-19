@@ -35,7 +35,7 @@ const SidePanel = ({ doctorId, consultationFee, timeSlots }) => {
     }
     catch (error) 
     {
-      console.log(error.message);
+      // console.log(error.message);
       toast.error(error.message);
     }
   }

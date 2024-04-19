@@ -17,7 +17,7 @@ const Doctors = () => {
   const handleSearch = () => {
     setQuery(query.trim());
 
-    console.log('handle search');
+    // console.log('handle search');
   }
 
   useEffect(() => {
