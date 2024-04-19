@@ -41,7 +41,9 @@ const Home = () => {
                   future.
                 </p>
 
+                <Link to="/doctors">
                 <button className="btn hover:bg-black/100">Request an Appointment</button>
+                </Link>
               </div>
 
               {/* Main Counter Section */}

@@ -1,8 +1,11 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { token } from "../../config";
+// import { token } from "../../config";
 
 const useFetchReviews = (url) => {
+
+  const token = localStorage.getItem("authToken");
+
   const [data, setData] = useState([]);
 
   const [reviews, setReviews] = useState([]);

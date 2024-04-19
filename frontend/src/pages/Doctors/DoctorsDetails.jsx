@@ -4,7 +4,7 @@ import { useState } from "react";
 import AboutDoctor from "./AboutDoctor";
 import Feedback from "./Feedback";
 import SidePanel from "./SidePanel";
-import { BASE_URL } from "../../../config";
+// import { BASE_URL } from "../../../config";
 import useFetchData from "../../hooks/useFetchData";
 import Loading from "../../components/Loader/Loading";
 import Error from "../../components/Error/Error";
@@ -12,6 +12,9 @@ import { useParams } from "react-router-dom";
 import useFetchReviews from "../../hooks/useFetchReviews";
 
 const DoctorsDetails = () => {
+
+  const BASE_URL = import.meta.env.BASE_URL;
+
   const [tab, setTab] = useState("");
 
   const { id } = useParams();

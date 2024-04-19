@@ -3,13 +3,16 @@ import avatar from "../../assets/images/avatar-icon.png";
 import { formatDate } from "../../utils/formatDate";
 import { AiFillStar } from "react-icons/ai";
 import FeedbackForm from "./FeedbackForm";
-import { BASE_URL } from "../../../config";
+// import { BASE_URL } from "../../../config";
 import useFetchData from "../../hooks/useFetchData";
 import Loading from "../../components/Loader/Loading";
 import Error from "../../components/Error/Error";
 
 
 const Feedback = ({reviews, totalRating}) => {
+  
+  const BASE_URL = import.meta.env.BASE_URL;
+
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
 
   // console.log(reviews);

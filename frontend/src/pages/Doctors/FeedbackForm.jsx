@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { useParams } from "react-router-dom";
-import {BASE_URL, token} from "../../../config"
+// import {BASE_URL, token} from "../../../config"
 import {toast} from "react-hot-toast"
 import HashLoader from 'react-spinners/HashLoader'
 
 const FeedbackForm = () => {
+
+  const BASE_URL = import.meta.env.BASE_URL;
+  const token = localStorage.getItem("authToken");
+
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [reviewText, setReviewText] = useState("");

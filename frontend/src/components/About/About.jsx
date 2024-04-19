@@ -33,7 +33,7 @@ const About = () => {
               consectetur adipisicing elit.
             </p>
 
-            <Link to="/">
+            <Link to="/services">
               <button className="btn hover:bg-black/100">Learn More</button>
             </Link>
           </div>

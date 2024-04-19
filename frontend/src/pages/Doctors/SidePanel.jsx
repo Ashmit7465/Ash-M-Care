@@ -1,9 +1,12 @@
 import React from "react";
 import convertTime from "../../utils/convertDate";
-import {BASE_URL, token} from "../../../config.js"
+// import {BASE_URL, token} from "../../../config.js"
 import {toast} from 'react-hot-toast';
 
 const SidePanel = ({ doctorId, consultationFee, timeSlots }) => {
+
+  const BASE_URL = import.meta.env.BASE_URL;
+  const token = localStorage.getItem("authToken");
 
   const bookingHandler = async () => {
     try 

@@ -2,11 +2,15 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import uploadImage from "../../utils/uploadCloudinary";
-import { BASE_URL, token } from "../../../config";
+// import { BASE_URL, token } from "../../../config";
 import { toast } from "react-hot-toast";
 import HashLoader from "react-spinners/HashLoader";
 
 const Profile = ({ user }) => {
+
+  const BASE_URL = import.meta.env.BASE_URL;
+  const token = localStorage.getItem("authToken");
+
   const [selectedFile, setSelectedFile] = useState(null);
 
   const [formData, setFormData] = useState({

@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import uploadImage from "../../utils/uploadCloudinary";
-import {BASE_URL, token} from "../../../config"
+// import {BASE_URL, token} from "../../../config"
 import {toast} from "react-hot-toast"
 import HashLoader from 'react-spinners/HashLoader'
 
 const Profile = ({doctorData}) => {
+
+  const BASE_URL = import.meta.env.BASE_URL;
+
+  const token = localStorage.getItem("authToken");
 
   const[loading, setLoading] = useState(false);
 

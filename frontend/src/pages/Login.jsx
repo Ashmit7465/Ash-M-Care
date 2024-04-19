@@ -2,12 +2,16 @@ import React, { useState, useContext } from "react";
 import logo_opt from "../assets/images/logo03.png";
 import { Link, useNavigate } from "react-router-dom";
 import {toast} from 'react-hot-toast'
-import { BASE_URL } from "../../config";
+// import { BASE_URL } from "../../config";
 import HashLoader from 'react-spinners/HashLoader'
 import { useDispatch, useSelector } from "react-redux";
 import { loginReducer } from "../../redux/authSlice";
 
 const Login = () => {
+
+  const BASE_URL = import.meta.env.BASE_URL;
+  const token = localStorage.getItem("authToken");
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",

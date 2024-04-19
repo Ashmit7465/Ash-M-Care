@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import userImg from "../../assets/images/doctor-img01.png";
+// import userImg from "../../assets/images/doctor-img01.png";
 import { useDispatch } from "react-redux";
 import { logoutReducer } from "../../../redux/authSlice";
 import MyBookings from "./MyBookings";
 import Profile from "./Profile";
 import useGetProfile from "../../hooks/useFetchData";
-import { BASE_URL } from "../../../config";
+// import { BASE_URL } from "../../../config";
 import Loading from "../../components/Loader/Loading";
 import Error from "../../components/Error/Error";
 
 const MyAccount = () => {
+
+  const BASE_URL = import.meta.env.BASE_URL;
   const dispatch = useDispatch();
 
   const logoutHandler = () => {

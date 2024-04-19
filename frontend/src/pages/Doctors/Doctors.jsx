@@ -2,12 +2,14 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import DoctorCard from "../../components/Doctors/DoctorCard";
 import Testimonial from "../../components/Testimonial/Testimonial";
-import { BASE_URL } from "../../../config";
+// import { BASE_URL } from "../../../config";
 import useFetchData from "../../hooks/useFetchData";
 import Loading from "../../components/Loader/Loading";
 import Error from "../../components/Error/Error";
 
 const Doctors = () => {
+
+  const BASE_URL = import.meta.env.BASE_URL;
 
   const [query, setQuery] = useState("");
   const [deQuery, setDeQuery] = useState("");

@@ -5,11 +5,14 @@ import { Link, useNavigate } from "react-router-dom";
 import avatar from "../assets/images/main-img-01.jpeg";
 import { useState } from "react";
 import uploadImage from "../utils/uploadCloudinary";
-import { BASE_URL } from "../../config";
+// import { BASE_URL } from "../../config";
 import { toast } from "react-hot-toast";
 import HashLoader from "react-spinners/HashLoader";
 
 const Signup = () => {
+
+  const BASE_URL = import.meta.env.BASE_URL;
+
   const [selectedFile, setSelectedFile] = useState(null);
 
   const [previewURL, setPreviewURL] = useState("");

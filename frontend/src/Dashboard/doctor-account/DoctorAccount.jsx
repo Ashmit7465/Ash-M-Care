@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Loading from "../../components/Loader/Loading";
 import Error from "../../components/Error/Error";
 import useFetchData from "../../hooks/useFetchData";
-import { BASE_URL } from "../../../config";
+// import { BASE_URL } from "../../../config";
 import Tabs from "./Tabs";
 import starIcon from "../../assets/images/Star.png";
 import AboutDoctor from "../../pages/Doctors/AboutDoctor"
@@ -10,6 +10,8 @@ import Profile from "./Profile";
 import Appointments from "./Appointments";
 
 const DoctorAccount = () => {
+
+  const BASE_URL = import.meta.env.BASE_URL;
   
   const { data, loading, error } = useFetchData(
     `${BASE_URL}/doctors/profile/me`
