@@ -11,7 +11,7 @@ import Error from "../../components/Error/Error";
 
 const Feedback = ({reviews, totalRating}) => {
   
-  const BASE_URL = import.meta.env.BASE_URL;
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
 

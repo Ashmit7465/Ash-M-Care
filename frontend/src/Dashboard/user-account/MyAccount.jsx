@@ -11,7 +11,8 @@ import Error from "../../components/Error/Error";
 
 const MyAccount = () => {
 
-  const BASE_URL = import.meta.env.BASE_URL;
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
+  console.log(BASE_URL);
   const dispatch = useDispatch();
 
   const logoutHandler = () => {

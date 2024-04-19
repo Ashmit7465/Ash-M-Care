@@ -13,7 +13,7 @@ import useFetchReviews from "../../hooks/useFetchReviews";
 
 const DoctorsDetails = () => {
 
-  const BASE_URL = import.meta.env.BASE_URL;
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   const [tab, setTab] = useState("");
 

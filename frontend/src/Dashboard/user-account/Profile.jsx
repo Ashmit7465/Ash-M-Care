@@ -8,7 +8,7 @@ import HashLoader from "react-spinners/HashLoader";
 
 const Profile = ({ user }) => {
 
-  const BASE_URL = import.meta.env.BASE_URL;
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
   const token = localStorage.getItem("authToken");
 
   const [selectedFile, setSelectedFile] = useState(null);

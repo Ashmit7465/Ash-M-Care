@@ -7,7 +7,7 @@ import HashLoader from 'react-spinners/HashLoader'
 
 const Profile = ({doctorData}) => {
 
-  const BASE_URL = import.meta.env.BASE_URL;
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   const token = localStorage.getItem("authToken");
 

@@ -7,7 +7,7 @@ import Error from "../Error/Error";
 
 const DoctorList = () => {
 
-  const BASE_URL = import.meta.env.BASE_URL;
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   const { data: doctors, loading, error } = useFetchData(`${BASE_URL}/doctors`);
 

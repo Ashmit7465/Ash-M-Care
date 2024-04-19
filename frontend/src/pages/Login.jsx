@@ -9,7 +9,7 @@ import { loginReducer } from "../../redux/authSlice";
 
 const Login = () => {
 
-  const BASE_URL = import.meta.env.BASE_URL;
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
   const token = localStorage.getItem("authToken");
 
   const [formData, setFormData] = useState({

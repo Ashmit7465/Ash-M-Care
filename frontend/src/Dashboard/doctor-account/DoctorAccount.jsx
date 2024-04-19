@@ -11,7 +11,7 @@ import Appointments from "./Appointments";
 
 const DoctorAccount = () => {
 
-  const BASE_URL = import.meta.env.BASE_URL;
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
   
   const { data, loading, error } = useFetchData(
     `${BASE_URL}/doctors/profile/me`

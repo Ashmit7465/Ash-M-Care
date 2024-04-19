@@ -5,7 +5,7 @@ import {toast} from 'react-hot-toast';
 
 const SidePanel = ({ doctorId, consultationFee, timeSlots }) => {
 
-  const BASE_URL = import.meta.env.BASE_URL;
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
   const token = localStorage.getItem("authToken");
 
   const bookingHandler = async () => {

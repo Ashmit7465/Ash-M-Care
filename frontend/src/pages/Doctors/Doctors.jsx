@@ -9,7 +9,7 @@ import Error from "../../components/Error/Error";
 
 const Doctors = () => {
 
-  const BASE_URL = import.meta.env.BASE_URL;
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   const [query, setQuery] = useState("");
   const [deQuery, setDeQuery] = useState("");
