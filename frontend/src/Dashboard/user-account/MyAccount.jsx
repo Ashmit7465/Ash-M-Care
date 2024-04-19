@@ -106,9 +106,9 @@ const MyAccount = () => {
                 >
                   Logout
                 </button>
-                <button onClick={deleteAccountHandler} className="w-full bg-red-600 p-3 text-[16px] leading-7 rounded-md text-white mt-4">
+                {/* <button onClick={deleteAccountHandler} className="w-full bg-red-600 p-3 text-[16px] leading-7 rounded-md text-white mt-4">
                   Delete My Account
-                </button>
+                </button> */}
               </div>
             </div>
 
