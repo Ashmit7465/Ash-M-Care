@@ -550,7 +550,7 @@ const Profile = ({doctorData}) => {
           <button
             type="submit"
             disabled={loading & true}
-
+            onClick={() => window.scrollTo({ top: "0", behavior: "smooth" })}
             className="bg-primaryClr text-white text-[18px] leading-[30px] w-full py-3 px-4 rounded-lg"
           >
             {loading ? (

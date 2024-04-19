@@ -33,7 +33,7 @@ const About = () => {
               consectetur adipisicing elit.
             </p>
 
-            <Link to="/services">
+            <Link to="/services" onClick={() => window.scrollTo({ top: "0", behavior: "smooth" })}>
               <button className="btn hover:bg-black/100">Learn More</button>
             </Link>
           </div>

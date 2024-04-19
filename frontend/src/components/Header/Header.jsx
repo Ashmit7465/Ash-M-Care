@@ -68,7 +68,7 @@ const Header = () => {
       <div className="container">
         <div className="flex items-center justify-between">
           <div className="w-40">
-            <Link to="/">
+            <Link to="/" onClick={() => window.scrollTo({ top: "0", behavior: "smooth" })}>
               <img src={logo_opt} alt="Logo" />
             </Link>
           </div>
@@ -79,6 +79,7 @@ const Header = () => {
                 <li>
                   <NavLink
                     to={link.path}
+                    onClick={() => window.scrollTo({ top: "0", behavior: "smooth" })}
                     className={(navClass) =>
                       navClass.isActive
                         ? "text-primaryClr text-[16px] leading-7 font-[600]"
@@ -102,6 +103,7 @@ const Header = () => {
                       ? "/doctors/profile/me"
                       : "/users/profile/me"
                   }`}
+                  onClick={() => window.scrollTo({ top: "0", behavior: "smooth" })}
                 >
                   <button className="w-[40px] h-[40px] rounded-full cursor-pointer">
                     <img
@@ -113,7 +115,7 @@ const Header = () => {
                 </Link>
               </div>
             ) : (
-              <Link to="/login">
+              <Link to="/login" onClick={() => window.scrollTo({ top: "0", behavior: "smooth" })}>
                 <button
                   className="bg-primaryClr py-2 px-6 text-white font-[600]
               h-[44px] flex items-center justify-center rounded-[50px] hover:bg-black/100"

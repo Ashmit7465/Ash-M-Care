@@ -19,7 +19,8 @@ const app = express();
 const port = process.env.PORT || 4000;
 
 const corsOptions = {
-  origin: true,
+  origin: process.env.CLIENT_SITE_URL,
+  credentials: true,
 };
 
 //middleware

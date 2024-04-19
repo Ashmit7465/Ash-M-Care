@@ -92,6 +92,7 @@ const Footer = () => {
             <div className="flex items-center gap-3 mt-4">
               {socialLinks.map((link, index) => (
                 <Link
+                  onClick={() => window.scrollTo({ top: "0", behavior: "smooth" })}
                   to={link.path}
                   key={index}
                   className="w-9 h-9 border border-solid border-[#181a1e] rounded-full flex items-center justify-center group hover:bg-primaryClr  hover:border-none"
@@ -111,6 +112,7 @@ const Footer = () => {
               {quickLinks01.map((item, index) => (
                 <li key={index} className="mb-4">
                   <Link
+                    onClick={() => window.scrollTo({ top: "0", behavior: "smooth" })}
                     to={item.path}
                     className="text-[16px] leading-7 font-[400] text-textClr"
                   >
@@ -130,6 +132,7 @@ const Footer = () => {
               {quickLinks02.map((item, index) => (
                 <li key={index} className="mb-4">
                   <Link
+                    onClick={() => window.scrollTo({ top: "0", behavior: "smooth" })}
                     to={item.path}
                     className="text-[16px] leading-7 font-[400] text-textClr"
                   >
@@ -149,6 +152,7 @@ const Footer = () => {
               {quickLinks03.map((item, index) => (
                 <li key={index} className="mb-4">
                   <Link
+                    onClick={() => window.scrollTo({ top: "0", behavior: "smooth" })}
                     to={item.path}
                     className="text-[16px] leading-7 font-[400] text-textClr"
                   >

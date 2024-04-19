@@ -17,6 +17,7 @@ const ServiceCard = ({ item, index }) => {
       <div className="flex items-center justify-between mt-[30px]">
         <Link
           to="/doctors"
+          onClick={() => window.scrollTo({ top: "0", behavior: "smooth" })}
           className="w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E]  flex items-center justify-center group hover:bg-primaryClr hover:border-none"
         >
           <BsArrowRight className="group-hover:text-white w-6 h-5" />
