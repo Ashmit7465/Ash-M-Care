@@ -8,12 +8,16 @@ import useGetProfile from "../../hooks/useFetchData";
 // import { BASE_URL } from "../../../config";
 import Loading from "../../components/Loader/Loading";
 import Error from "../../components/Error/Error";
+import {toast} from 'react-hot-toast';
+import { useNavigate } from "react-router-dom";
 
 const MyAccount = () => {
 
   const BASE_URL = import.meta.env.VITE_BASE_URL;
-  console.log(BASE_URL);
+  const token = localStorage.getItem("authToken");
+  // console.log(BASE_URL);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const logoutHandler = () => {
     dispatch(logoutReducer());
@@ -27,7 +31,38 @@ const MyAccount = () => {
     error,
   } = useGetProfile(`${BASE_URL}/users/profile/me`);
 
-  console.log(userData, "UserData");
+  // console.log(userData, "UserData");
+
+  const deleteAccountHandler = async (ev) => {
+    console.log("delete karna hai");
+    ev.preventDefault();
+    try 
+    {
+        const res = await fetch(`${BASE_URL}/users/${userData._id}`, {
+          method: "delete",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const result = await res.json();
+
+        if(!result.message)
+        {
+          toast.error(result.message);
+          throw new Error(result.message);
+        }
+
+        toast.success(result.message);
+        dispatch(logoutReducer());
+        navigate("/login");
+    } 
+    catch (error) 
+    {
+      toast.error(error.message);
+    }
+  }
 
   return (
     <section>
@@ -71,7 +106,7 @@ const MyAccount = () => {
                 >
                   Logout
                 </button>
-                <button className="w-full bg-red-600 p-3 text-[16px] leading-7 rounded-md text-white mt-4">
+                <button onClick={deleteAccountHandler} className="w-full bg-red-600 p-3 text-[16px] leading-7 rounded-md text-white mt-4">
                   Delete My Account
                 </button>
               </div>

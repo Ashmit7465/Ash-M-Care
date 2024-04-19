@@ -2,13 +2,51 @@ import React from "react";
 import { BiMenu } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 import { logoutReducer } from "../../../redux/authSlice";
+import {toast} from 'react-hot-toast';
+import { useNavigate } from "react-router-dom";
 
-const Tabs = ({ tab, setTab }) => {
+const Tabs = ({ tab, setTab, doctor }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const token = localStorage.getItem("authToken");
+
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   const logoutHandler = () => {
     dispatch(logoutReducer());
   };
+
+  const deleteAccountHandler = async (ev) => {
+    console.log("delete karna hai");
+    ev.preventDefault();
+    try 
+    {
+        const res = await fetch(`${BASE_URL}/doctors/${doctor._id}`, {
+          method: "delete",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const result = await res.json();
+
+        if(!result.message)
+        {
+          toast.error(result.message);
+          throw new Error(result.message);
+        }
+
+        toast.success(result.message);
+        dispatch(logoutReducer());
+        navigate("/login");
+    } 
+    catch (error) 
+    {
+      toast.error(error.message);
+    }
+  }
 
   return (
     <div>
@@ -54,7 +92,9 @@ const Tabs = ({ tab, setTab }) => {
           >
             Logout
           </button>
-          <button className="w-full bg-red-600 p-3 text-[16px] leading-7 rounded-md text-white mt-4">
+          <button
+          onClick={deleteAccountHandler} 
+          className="w-full bg-red-600 p-3 text-[16px] leading-7 rounded-md text-white mt-4">
             Delete My Account
           </button>
         </div>
